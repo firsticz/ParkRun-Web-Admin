@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Parkrun Admin",
+  "name": "Parkrun Admin",
   "icons": [
     {
       "src": "favicon.ico",

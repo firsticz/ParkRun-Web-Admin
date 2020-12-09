@@ -1,0 +1,65 @@
+import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import EventList from './event'
+import EventEdit from './eventEdit'
+import EventBoard from './eventBoard'
+import RacesList from './racesList'
+import Registrations from './RegistrationByRace'
+import RaceRegistrations from './racesRegistration'
+import EventStats from './eventStats'
+import RaceCreate from './raceCreate'
+class Events extends Component {
+  render () {
+    return (
+      <Switch>
+        <Route 
+          exact
+          path="/events"
+          component={EventList}
+        />
+        <Route
+          exact
+          path="/events/:eventId/edit"
+          component={EventEdit}
+          />
+          {/* <Route
+          exact
+          path="/events/:eventId/stats"
+          component={EventBoard}
+          /> */}
+          <Route
+          exact
+          path="/events/:eventId/races"
+          component={RacesList}
+          />
+          <Route
+          exact
+          path="/events/:eventId/result"
+          component={EventBoard}
+          />
+          <Route
+          exact
+          path="/events/:eventId/registrations"
+          component={RaceRegistrations}
+          />
+          <Route
+          exact
+          path="/events/:eventId/racesregistrations/:raceId"
+          component={Registrations}
+          />
+          <Route
+          exact
+          path="/events/:eventId/stats"
+          component={EventStats}
+          />
+          <Route
+          exact
+          path="/events/:eventId/createrace"
+          component={RaceCreate}
+          />
+      </Switch>
+    )
+  }
+}
+
+export default Events
