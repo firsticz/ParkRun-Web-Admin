@@ -44,8 +44,8 @@ const EventStats = () => {
 
   const participantGender = regis.data.participantGender
   const registrations = regisall.data.regisMany
-  const runnerRegistrations = _filter(registrations, {'regisType': 'runner'})
-  const valunteerRegistrations = _filter(registrations, {'regisType': 'valunteer'})
+  const runnerRegistrations = _filter(registrations, {'regisType': 'RUNNER'})
+  const valunteerRegistrations = _filter(registrations, {'regisType': 'VALUNTEER'})
 
   const runnerCount = runnerRegistrations.length
   const valunteerCount = valunteerRegistrations.length
@@ -56,7 +56,7 @@ const EventStats = () => {
       'count': runnerCount
     },
     {
-      'regisType': 'valunteer',
+      'regisType': 'volunteer',
       'count': valunteerCount
     }
   ]

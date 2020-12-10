@@ -1,4 +1,4 @@
-import React, { Component, Suspense, lazy } from 'react'
+import React, { Component, Suspense } from 'react'
 import {
   Route,
   Switch,
@@ -8,10 +8,8 @@ import {
 import { AppWrapper, Logo } from './style'
 import logo from './images/logo_parkrun.png';
 import './App.css';
-import compose from 'lodash/flowRight'
-import { withApollo, graphql } from 'react-apollo'
 
-import { Layout, Menu, /* Breadcrumb, */ Dropdown, Icon, Button } from 'antd'
+import { Layout, Menu, /* Breadcrumb, */ Dropdown } from 'antd'
 import { BarsOutlined } from '@ant-design/icons'
 import clientAuth from './utils/clientAuth'
 import Events from './components/Event'

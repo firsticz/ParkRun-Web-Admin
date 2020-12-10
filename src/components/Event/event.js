@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import compose from 'lodash/flowRight'
-import { Table, Icon, Tooltip, Input, Spin } from 'antd'
+import { Table, Tooltip, Input, Spin } from 'antd'
 import { TagsOutlined } from '@ant-design/icons'
 import _orderBy from 'lodash/orderBy'
 import _get from 'lodash/get'

@@ -1,16 +1,8 @@
-import React, { Component, useState } from 'react'
-import {
-  Link,
-  Route
-} from 'react-router-dom'
-import { graphql } from 'react-apollo'
+import React, { useState } from 'react'
 import compose from 'lodash/flowRight'
-import { useParams, useHistory, Redirect } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { Table, List, Tooltip, Tabs, Layout, Dropdown, Menu, Button, Modal, Input, Avatar, Tag } from 'antd'
-import { TagsOutlined } from '@ant-design/icons'
-import EventForm from './eventForm'
-import _orderBy from 'lodash/orderBy'
+import { Table, List, Tabs, Layout, Dropdown, Menu, Button, Modal, Input, Avatar, Tag } from 'antd'
 import _get from 'lodash/get'
 import _filter from 'lodash/filter'
 import EventSider from './eventSider'
@@ -21,7 +13,6 @@ import getUserByBib from '../../graphql/queries/getUserByBib'
 import raceById from '../../graphql/queries/raceById'
 import '../../style/responsive-table.css'
 import '../../style/EventRegistrations.css'
-import Search from 'antd/lib/input/Search'
 import { Form } from '@ant-design/compatible'
 
 const { TabPane } = Tabs
@@ -212,10 +203,10 @@ const EventRegistrations = (props) => {
     setUser({})
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = async(e) => {
     e.preventDefault()
     setLoading(true)
-    props.form.validateFieldsAndScroll(async (err, record) => {
+    props.form.validateFieldsAndScroll( async(err, record) => {
       if (err) {
         setLoading(false)
         return console.error(err)
@@ -226,9 +217,6 @@ const EventRegistrations = (props) => {
       
     })
   }
-  const handleOk = () => {
-    console.log('test')
-  };
 
   const handleAddRegister = async() => {
     try {
@@ -263,6 +251,7 @@ const EventRegistrations = (props) => {
     <Layout>
       <EventSider />
       <Layout.Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+        <h1>{_get(RaceOne.data.raceOne, 'name')}</h1>
         <Tabs defaultActiveKey="1" type="card" size={'small'}>
           <TabPane tab="นักวิ่ง" key="1">
             <Table

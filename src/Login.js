@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import compose from 'lodash/flowRight'
-import { Link } from 'react-router-dom'
 import { Form } from '@ant-design/compatible'
 import { message, Input, Button } from 'antd'
 import '@ant-design/compatible/assets/index.css'; 

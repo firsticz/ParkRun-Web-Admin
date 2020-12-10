@@ -1,24 +1,17 @@
 import React, { useState } from 'react'
-import { graphql } from 'react-apollo'
 import _get from 'lodash/get'
 import {
   Input,
   Button,
   Select,
-  DatePicker,
-  Switch,
   Modal,
-  InputNumber,
-  Tabs,
-  Radio,
-  Divider,
 } from 'antd'
 import { Form } from '@ant-design/compatible'
 import { SaveOutlined } from '@ant-design/icons'
 
 import compose from 'lodash/flowRight'
 import _includes from 'lodash/includes'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/react-hooks'
 import updateEventMutation from '../../graphql/mutations/updateEvent'
 import clientAuth from '../../utils/clientAuth'
 
@@ -36,7 +29,7 @@ const formItemLayout = {
 const EventForm = (props) => {
   const { form, event } = props
   const role = clientAuth.login().role
-  const { getFieldDecorator, getFieldValue } = form
+  const { getFieldDecorator } = form
   const [loading, setLoading] = useState(false)
   const [eventUpdateById] = useMutation(updateEventMutation)
 

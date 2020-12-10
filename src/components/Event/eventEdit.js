@@ -1,15 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
-  Link,
   Route
 } from 'react-router-dom'
-import { graphql } from 'react-apollo'
-import compose from 'lodash/flowRight'
 import { useQuery } from '@apollo/react-hooks'
-import { Table, Icon, Tooltip, Input, Layout } from 'antd'
-import { TagsOutlined } from '@ant-design/icons'
+import { Layout } from 'antd'
 import EventForm from './eventForm'
-import _orderBy from 'lodash/orderBy'
 import _get from 'lodash/get'
 import EventSider from './eventSider'
 import eventQuery from '../../graphql/queries/eventOne'
