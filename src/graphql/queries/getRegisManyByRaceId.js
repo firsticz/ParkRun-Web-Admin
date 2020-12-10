@@ -15,6 +15,10 @@ query($eventId : MongoID){
             gender
             phone
             image
+            bib
+            email
+            emergenPhone
+            drug
         }
     }
   }

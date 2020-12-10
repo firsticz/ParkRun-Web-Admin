@@ -7,7 +7,7 @@ import { graphql } from 'react-apollo'
 import compose from 'lodash/flowRight'
 import { useParams, useHistory, Redirect } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { Table, List, Tooltip, Tabs, Layout, Dropdown, Menu, Button, Modal, Input, Avatar } from 'antd'
+import { Table, List, Tooltip, Tabs, Layout, Dropdown, Menu, Button, Modal, Input, Avatar, Tag } from 'antd'
 import { TagsOutlined } from '@ant-design/icons'
 import EventForm from './eventForm'
 import _orderBy from 'lodash/orderBy'
@@ -96,11 +96,20 @@ const EventRegistrations = (props) => {
     //   this.props.history.push(`/events/${this.props.data.event._id}/registrations/${registration._id}/edit`)
     // }
   }
+  const bibNumber = (number) => {
+    const pad = '0000000'
+    return pad.substr(0, pad.length - `${number}`.length) + number
+  }
   const columns1 = [{
     title: 'รูป',
     dataIndex: 'user',
     key: 'user',
     render: (user) => <Avatar size={80} src={`${user.image}`} />
+  },{
+    title: 'เลขบิบ',
+    dataIndex: 'user',
+    key: 'bib',
+    render: (user) => bibNumber(Number(user.bib))
   },{
     title: 'ชื่อผู้สมัคร',
     dataIndex: 'user',
@@ -111,12 +120,37 @@ const EventRegistrations = (props) => {
     dataIndex: 'user',
     key: 'user.gender',
     render: (user) => user.gender === 'male'? 'ชาย': 'หญิง'
+  },{
+    title: 'อีเมล',
+    dataIndex: 'user',
+    key: 'email',
+    render: (user) => user.email
+  },{
+    title: 'เบอร์โทร',
+    dataIndex: 'user',
+    key: 'phone',
+    render: (user) => user.phone
+  },{
+    title: 'เบอร์โทรฉุกเฉิน',
+    dataIndex: 'user',
+    key: 'emergenPhone',
+    render: (user) => user.emergenPhone
+  },{
+    title: 'ประวัติการแพ้ยา',
+    dataIndex: 'user',
+    key: 'drug',
+    render: (user) => user.drug
   }]
   const columns2 = [{
     title: 'รูป',
     dataIndex: 'user',
     key: 'user',
     render: (user) => <Avatar size={80} src={`${user.image}`} />
+  },{
+    title: 'เลขบิบ',
+    dataIndex: 'user',
+    key: 'bib',
+    render: (user) => bibNumber(Number(user.bib))
   },{
     title: 'ชื่อผู้สมัคร',
     dataIndex: 'user',
@@ -128,17 +162,27 @@ const EventRegistrations = (props) => {
     key: 'user.gender',
     render: (user) => user.gender === '' ? '': user.gender === 'male'? 'ชาย': 'หญิง'
   },{
+    title: 'อีเมล',
+    dataIndex: 'user',
+    key: 'email',
+    render: (user) => user.email
+  },{
     title: 'เบอร์โทร',
     dataIndex: 'user',
     key: 'user.phone',
     render: (user) => user.phone
+  },{
+    title: 'เบอร์โทรฉุกเฉิน',
+    dataIndex: 'user',
+    key: 'emergenPhone',
+    render: (user) => user.emergenPhone
   }, {
     title: 'สถานะ',
     dataIndex: 'status',
     key: 'status',
     render: (status, record) => (<React.Fragment>
       <span style={{ whiteSpace: 'pre-line' }}>
-        {status==='apporve'? 'อนุมัติแล้ว':status==='waiting'?'รออนุมัติ':'ไม่อนุมัติ'}
+        {status==='apporve'? <Tag color="green">อนุมัติแล้ว</Tag>:status==='waiting'? <Tag color="orange">รออนุมัติ</Tag>: <Tag color="red">ไม่อนุมัติ</Tag>}
       </span>
       <div style={{marginTop: 5}}>
         <Dropdown placement="topCenter" overlay={
