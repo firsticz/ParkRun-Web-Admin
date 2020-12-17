@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import {
   Link,
   Route
@@ -22,7 +22,9 @@ import _filter from 'lodash/filter'
 import EventSider from './eventSider'
 import getRegistrationGender from '../../graphql/queries/getRegisGender'
 import getRegistration from '../../graphql/queries/getRegistrations'
+import getallStat from '../../graphql/queries/allStat'
 import '../../style/Stats.css'
+import StatRenderChart from '../chart/allStatLinechart'
 
 ReactFC.fcRoot(FusionCharts, Charts, FusionTheme)
 
@@ -34,6 +36,8 @@ const EventStats = () => {
   const regisall = useQuery(getRegistration, {
     variables: {eventId: eventId}
   })
+  const statall = useQuery(getallStat, {fetchPolicy: 'network-only'})
+
 
   if(regis.loading){
     return <p>loading .....</p>
@@ -41,9 +45,14 @@ const EventStats = () => {
   if(regisall.loading){
     return <p>loading .....</p>
   }
+  if(statall.loading){
+    return <p>loading .....</p>
+  }
 
   const participantGender = regis.data.participantGender
   const registrations = regisall.data.regisMany
+  const statresult = statall.data.resultStats
+  console.log(statresult);
   const runnerRegistrations = _filter(registrations, {'regisType': 'RUNNER'})
   const valunteerRegistrations = _filter(registrations, {'regisType': 'VALUNTEER'})
 
@@ -127,6 +136,15 @@ const EventStats = () => {
                   dataFormat="JSON"
                   dataSource={registrationsByregisType}
                 />
+              </div>}
+            />
+          </Col>
+
+          <Col sm={24} md={24} lg={12} style={{width: '100%'}}>
+            <Card
+              hoverable
+              cover={<div className="chart-pie-cover">
+                <StatRenderChart data={statresult}  />
               </div>}
             />
           </Col>

@@ -105,6 +105,7 @@ const EventRegistrations = (props) => {
     title: 'ชื่อผู้สมัคร',
     dataIndex: 'user',
     key: 'user',
+    width: '100%',
     render: (user) => user.name
   }, {
     title: 'เพศ',
@@ -262,6 +263,7 @@ const EventRegistrations = (props) => {
             size={'small'}
             rowKey={'_id'}
             scroll={{ x: true }}
+            style={{ width: 'auto' }}
             //scroll={isMobile ? {} : { x: 1200, y: 800 }}
             // pagination={{
             //     defaultPageSize: perPage,
@@ -330,6 +332,7 @@ const EventRegistrations = (props) => {
             size={'small'}
             rowKey={'_id'}
             scroll={{ x: true }}
+            style={{ width: 'auto' }}
             //scroll={isMobile ? {} : { x: 1200, y: 800 }}
             // pagination={{
             //     defaultPageSize: perPage,

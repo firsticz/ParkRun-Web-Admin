@@ -71,12 +71,12 @@ const EventSider = (props) => {
               แก้ไขสนามวิ่ง
           </NavLink>
         </Menu.Item>
-        <Menu.Item key="stats">
+        {/* <Menu.Item key="stats">
           <NavLink to={`/events/${eventId}/stats`}>
             <LineChartOutlined style={{fontSize: 16, color: '#314659'}} />
               สถิติการสมัคร
           </NavLink>
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item key="result">
           <NavLink to={`/events/${eventId}/races`}>
             <LineChartOutlined style={{fontSize: 16, color: '#314659'}} />

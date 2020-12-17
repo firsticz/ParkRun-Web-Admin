@@ -14,6 +14,7 @@ import _includes from 'lodash/includes'
 import { useMutation } from '@apollo/react-hooks'
 import updateEventMutation from '../../graphql/mutations/updateEvent'
 import clientAuth from '../../utils/clientAuth'
+const { TextArea } = Input;
 
 const formItemLayout = {
   labelCol: {
@@ -108,10 +109,58 @@ const EventForm = (props) => {
             <Input />
           )}
         </Form.Item>
+        <Form.Item {...formItemLayout} label="อีเมลผู้ดูแล" hasFeedback>
+          {getFieldDecorator('organizEmail', {
+            initialValue: _get(event, 'organizEmail'),
+            rules: [{ required: true, message: 'กรุณากรอก อีเมลผู้ดูแล' }]
+          })(
+            <Input />
+          )}
+        </Form.Item>
         <Form.Item {...formItemLayout} label="description" hasFeedback>
           {getFieldDecorator('description', {
             initialValue: _get(event, 'description'),
             rules: [{ required: true, message: 'กรุณากรอก description' }]
+          })(
+            <Input />
+          )}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="รายละเอียดเส้นทาง" hasFeedback>
+          {getFieldDecorator('road', {
+            initialValue: _get(event, 'road'),
+            rules: [{ required: true, message: 'กรุณากรอก รายละเอียดเส้นทาง' }]
+          })(
+            <TextArea />
+          )}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="การเดินทาง" hasFeedback>
+          {getFieldDecorator('route', {
+            initialValue: _get(event, 'route'),
+            rules: [{ required: true, message: 'กรุณากรอก การเดินทาง' }]
+          })(
+            <TextArea />
+          )}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="ที่อยู่" hasFeedback>
+          {getFieldDecorator('location', {
+            initialValue: _get(event, 'location'),
+            rules: [{ required: true, message: 'กรุณากรอก ที่อยู่' }]
+          })(
+            <TextArea />
+          )}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="จุดปล่อยตัว" hasFeedback>
+          {getFieldDecorator('startPoint', {
+            initialValue: _get(event, 'startPoint'),
+            rules: [{ required: true, message: 'กรุณากรอก จุดปล่อยตัว' }]
+          })(
+            <Input />
+          )}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="เส้นชัย" hasFeedback>
+          {getFieldDecorator('finishPoint', {
+            initialValue: _get(event, 'finishPoint'),
+            rules: [{ required: true, message: 'กรุณากรอก เส้นชัย' }]
           })(
             <Input />
           )}

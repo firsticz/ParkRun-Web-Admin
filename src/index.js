@@ -61,6 +61,15 @@ ReactDOM.render(
         <Router routerStore={routerStore} component={BrowserRouter}>
           <Switch>
             <Route path="/login" component={Login} />
+            <Route path="/token" render={({location})=>{
+              const queryString = location.search;
+
+              const urlParams = new URLSearchParams(queryString);
+              
+              const token = urlParams.get('token')
+              localStorage.setItem('token', `${token}`)
+              return <Redirect to={{ pathname: '/' }} />
+            }} />
             <PrivateRoute path="/" component={App} />
           </Switch>
         </Router>

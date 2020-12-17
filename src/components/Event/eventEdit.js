@@ -18,7 +18,8 @@ const EventEdit = (props) => {
   const eventProps = useQuery(eventQuery, {
     variables: {
       _id: eventId
-    }
+    },
+    fetchPolicy: 'network-only'
   })
   const eventLoading = _get(eventProps, 'loading')
   const event = _get(eventProps, 'data.eventOne')

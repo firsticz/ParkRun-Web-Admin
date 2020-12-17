@@ -15,6 +15,7 @@ import clientAuth from './utils/clientAuth'
 import Events from './components/Event'
 import Users from './components/User'
 import FetchPage from './components/FetchPage'
+import Stats from './components/Stats/stats'
 
 import _get from 'lodash/get'
 import _includes from 'lodash/includes'
@@ -45,6 +46,11 @@ class App extends Component {
             สร้างงานวิ่ง
           </Link>
         </Menu.Item>,
+        _includes(roles, 'ADMIN') && <Menu.Item key="stats">
+         <Link to="/stats">
+             สถิติระบบ
+         </Link>
+       </Menu.Item>,
       _includes(roles, 'ADMIN') && <Menu.Item key="organizers">
         <Link to="/organizers">
             ผู้จัดงาน
@@ -107,6 +113,7 @@ class App extends Component {
                 <Switch>
                   <Route path="/events" component={Events}/>
                   <Route path="/users" component={Users}/>
+                  <Route path="/stats" component={Stats}/>
                   <Route path="/fetchPage" component={FetchPage}/>
                   {/* <Route path="/events" component={Events}/> */}
                   {/* <Route path="/fetchPage" component={FetchPage}/> */}
