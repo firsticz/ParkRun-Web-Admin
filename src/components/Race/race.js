@@ -6,16 +6,14 @@ import { graphql } from 'react-apollo'
 import compose from 'lodash/flowRight'
 import { Table, Icon, Tooltip, Input, Spin, Layout, Tag, Dropdown, Menu, Button } from 'antd'
 import { TagsOutlined } from '@ant-design/icons'
-import moment from 'moment'
-import 'moment/locale/th'
 import _orderBy from 'lodash/orderBy'
 import _get from 'lodash/get'
-import racesQuery from '../../graphql/queries/races'
-import EventSider from './eventSider'
+import moment from 'moment'
+import racesQuery from '../../graphql/queries/raceMany'
+// import EventSider from './eventSider'
 const Search = Input.Search
-moment.locale('th')
 
-class RaceRegistrations extends Component {
+class RaceList extends Component {
   state = {
     searchKey: '',
     isMobile: window.innerWidth <= 750
@@ -54,7 +52,7 @@ class RaceRegistrations extends Component {
         key: 'name',
         render: (record) =>
           <Tooltip placement="bottom" title={_get(record, 'name')}>
-            <Link to={`/events/${record.eventId}/racesregistrations/${record._id}`} style={{color: 'inherit', textDecoration: 'none'}}>
+            <Link to={`/events/${record._id}/result`} style={{color: 'inherit', textDecoration: 'none'}}>
               {isMobile && <TagsOutlined />} {_get(record, 'name')}
             </Link>
           </Tooltip>
@@ -93,7 +91,7 @@ class RaceRegistrations extends Component {
 
     return (
       <Layout>
-        <EventSider />
+        {/* <EventSider /> */}
         <Layout.Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
           <Search
             placeholder="ค้นหา"
@@ -105,7 +103,7 @@ class RaceRegistrations extends Component {
             //     // console.log({record})
             //     return {
             //     onClick: event => {
-            //         history.replace(`/events/${record.eventId}/racesregistrations/${record._id}`)
+            //         history.replace(`/events/${record._id}/result`)
             //     } 
             //     }
             // }}
@@ -132,4 +130,4 @@ export default compose(
         variables: { _id: props.match.params.eventId },
         fetchPolicy: 'network-only' })
   })
-)(RaceRegistrations)
+)(RaceList)

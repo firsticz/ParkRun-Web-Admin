@@ -23,6 +23,9 @@ query($_id : MongoID){
         location
         startPoint
         finishPoint
+        banner
+        eventRoute
+        levels
     }
   }
 `

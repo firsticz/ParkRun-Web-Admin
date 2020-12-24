@@ -1,9 +1,8 @@
-import React, { Component, useEffect } from 'react'
-import compose from 'lodash/flowRight'
+import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 
 
-import { Table, Icon, Tooltip, Input, Layout, Row, Col, Card } from 'antd'
+import { Layout, Row, Col, Card } from 'antd'
 import _orderBy from 'lodash/orderBy'
 import _get from 'lodash/get'
 import _filter from 'lodash/filter'
@@ -37,6 +36,7 @@ const Stats = () => {
 
           <Col sm={24} md={24} lg={12} style={{width: '100%'}}>
             <Card
+              title="Result Stats"
               hoverable
               cover={<div className="chart-pie-cover">
                 <StatRenderChart data={statresult}  />
@@ -45,6 +45,7 @@ const Stats = () => {
           </Col>
           <Col sm={24} md={24} lg={12} style={{width: '100%'}}>
             <Card
+              title="Gender Stats"
               hoverable
               cover={<div className="chart-pie-cover">
                 <GenderWeekChart data={statGenderWeek}  />

@@ -16,6 +16,7 @@ import Events from './components/Event'
 import Users from './components/User'
 import FetchPage from './components/FetchPage'
 import Stats from './components/Stats/stats'
+import Races from './components/Race'
 
 import _get from 'lodash/get'
 import _includes from 'lodash/includes'
@@ -40,12 +41,12 @@ class App extends Component {
             สนามวิ่ง
         </Link>
       </Menu.Item>,
-      _includes(roles, 'ADMIN') &&
-        <Menu.Item key="createEvent">
-          <Link to="/events/create">
-            สร้างงานวิ่ง
-          </Link>
-        </Menu.Item>,
+      // _includes(roles, 'ADMIN') &&
+      //   <Menu.Item key="races">
+      //     <Link to="/races">
+      //       งานวิ่ง
+      //     </Link>
+      //   </Menu.Item>,
         _includes(roles, 'ADMIN') && <Menu.Item key="stats">
          <Link to="/stats">
              สถิติระบบ
@@ -114,6 +115,7 @@ class App extends Component {
                   <Route path="/events" component={Events}/>
                   <Route path="/users" component={Users}/>
                   <Route path="/stats" component={Stats}/>
+                  <Route path="/races" component={Races}/>
                   <Route path="/fetchPage" component={FetchPage}/>
                   {/* <Route path="/events" component={Events}/> */}
                   {/* <Route path="/fetchPage" component={FetchPage}/> */}

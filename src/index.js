@@ -12,6 +12,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { Provider } from 'mobx-react'
 import { Router } from 'react-router-mobx'
 import { ApolloProvider } from 'react-apollo'
+import firebase from 'firebase'
+import firebaseConfig from './firebaseConfig'
 import createHistory from 'history/createBrowserHistory'
 
 
@@ -21,6 +23,8 @@ import clientAuth from './utils/clientAuth'
 import App from './App'
 import Login from './Login'
 import 'antd/dist/antd.css'
+
+firebase.initializeApp(firebaseConfig)
 
 const history = createHistory()
 

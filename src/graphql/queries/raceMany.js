@@ -1,10 +1,8 @@
 import gql from 'graphql-tag'
 
 export default gql`
-query($_id : MongoID){
-    raceMany(filter:{
-        eventId: $_id
-    }){
+query{
+    raceMany{
         _id
         name
           slug

@@ -14,6 +14,7 @@ import _includes from 'lodash/includes'
 import { useMutation } from '@apollo/react-hooks'
 import updateEventMutation from '../../graphql/mutations/updateEvent'
 import clientAuth from '../../utils/clientAuth'
+import ResizeUploader from '../resizeImageUploader'
 const { TextArea } = Input;
 
 const formItemLayout = {
@@ -66,6 +67,21 @@ const EventForm = (props) => {
     })
   }
 
+  const level = [
+    {
+      value: 'every',
+      label: 'จัดทุกสัปดาห์',
+    },
+    {
+      value: 'twice',
+      label: 'จัดเดือนละ 2 ครั้ง (จัดวันเสาร์แรกและเสาร์สามของเดือน)',
+    },
+    {
+      value: 'onec',
+      label: 'จัดเดือนละ 1 ครั้ง (จัดวันเสาร์แรก)',
+    }
+  ]
+
   return (
     <Form>
       {_get(event, '_id') ? <h2>แก้ไขสนามวิ่ง</h2> : <h2>สร้างงานวิ่ง</h2>}
@@ -77,14 +93,14 @@ const EventForm = (props) => {
             <Input />
           )}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="URL slug" hasFeedback>
+        {_includes(role, 'ADMIN') && <Form.Item {...formItemLayout} label="URL slug" hasFeedback>
           {getFieldDecorator('slug', {
             initialValue: _get(event, 'slug'),
             rules: [{ required: true, message: 'กรุณากรอก slug' }]
           })(
             <Input />
           )}
-        </Form.Item>
+        </Form.Item>}
         <Form.Item {...formItemLayout} label="พิกัด GPS สนาม" hasFeedback>
           {getFieldDecorator('address', {
             initialValue: _get(event, 'address'),
@@ -125,6 +141,19 @@ const EventForm = (props) => {
             <Input />
           )}
         </Form.Item>
+        <Form.Item {...formItemLayout} label="จัดวันวิ่ง" hasFeedback>
+          {getFieldDecorator('levels', {
+            initialValue: _get(event, 'levels'),
+          })(
+            <Select
+              placeholder="เลือก จัดวันวิ่ง"
+            >
+              {level && level.map((le) => (
+                <Select.Option  value={le.value}>{le.label}</Select.Option>
+              ))}
+            </Select>
+          )}
+        </Form.Item>
         <Form.Item {...formItemLayout} label="รายละเอียดเส้นทาง" hasFeedback>
           {getFieldDecorator('road', {
             initialValue: _get(event, 'road'),
@@ -163,6 +192,27 @@ const EventForm = (props) => {
             rules: [{ required: true, message: 'กรุณากรอก เส้นชัย' }]
           })(
             <Input />
+          )}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="อัพโหลดรูปหน้าปกสนามวิ่ง ขนาด 300x200 px">
+          {getFieldDecorator('image', {
+            initialValue: _get(event, 'image'),
+          })(
+            <ResizeUploader dimension={1198}/>
+          )}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="อัพโหลดรูปเพจสนามวิ่ง ขนาด 1300x400 px">
+          {getFieldDecorator('banner', {
+            initialValue: _get(event, 'banner'),
+          })(
+            <ResizeUploader dimension={1198}/>
+          )}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="อัพโหลดรูปแผนที่วิ่งของสนาม ขนาด 750x300 px">
+          {getFieldDecorator('eventRoute', {
+            initialValue: _get(event, 'eventRoute'),
+          })(
+            <ResizeUploader dimension={1198}/>
           )}
         </Form.Item>
         {_includes(role, 'ADMIN') && <Form.Item {...formItemLayout} label="approved" hasFeedback>

@@ -1,10 +1,5 @@
 import React, { Component, useEffect } from 'react'
-import {
-  Link,
-  Route
-} from 'react-router-dom'
-import { graphql } from 'react-apollo'
-import compose from 'lodash/flowRight'
+
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 
@@ -13,9 +8,7 @@ import Charts from 'fusioncharts/fusioncharts.charts'
 import ReactFC from 'react-fusioncharts'
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion'
 
-import { Table, Icon, Tooltip, Input, Layout, Row, Col, Card } from 'antd'
-import { TagsOutlined } from '@ant-design/icons'
-import EventForm from './eventForm'
+import { Layout, Row, Col, Card } from 'antd'
 import _orderBy from 'lodash/orderBy'
 import _get from 'lodash/get'
 import _filter from 'lodash/filter'
