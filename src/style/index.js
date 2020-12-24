@@ -5,6 +5,8 @@ const { Content } = Layout
 export const AppWrapper = styled.div`
   .ant-layout-header {
     padding: 0 13px;
+    background-color: #41aea9;
+    height: auto;
   }
   .code-box {
     border: 1px solid #ebedf0;
@@ -36,7 +38,7 @@ export const AppWrapper = styled.div`
     font-weight: 500;
     margin-bottom: 20px;
     margin-top: 8px;
-    font-family: Lato,Monospaced Number,Chinese Quote,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: 'Kanit', sans-serif;
     font-size: 30px;
     line-height: 38px;
   }
@@ -45,7 +47,9 @@ export const AppWrapper = styled.div`
 export const Logo = styled.div`
   float: left;
   img {
-    width: 40px;
-    height: 60px;
+    width: auto;
+    height: 65px;
+    padding: 5px;
+    align-items: center;
   }
 `

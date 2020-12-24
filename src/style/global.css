@@ -22,7 +22,12 @@
 .ant-form-item {
     margin-bottom: 7px;
 }
-
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+  background-color: rgba(33,62,59,0.3) !important; 
+}
+.ant-menu-dark.ant-menu-horizontal >  .ant-menu-item:hover {
+  background-color: rgba(33,62,59,0.3) !important; 
+}
 @media screen and (max-width: 750px) {
     .form-content {
         padding: 24px !important;
@@ -197,8 +202,8 @@ div.ant-steps-item-title {
 }
 div.ant-steps-item-custom.ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon button,
 div.ant-steps-item-custom.ant-steps-item-process .ant-steps-item-icon > .ant-steps-icon button {
-  color: #1890ff;
-  border-color: #1890ff;
+  color: #41aea9;
+  border-color: #41aea9;
 }
 div.eventItem {
   padding: 20px;

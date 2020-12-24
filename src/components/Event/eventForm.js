@@ -133,10 +133,10 @@ const EventForm = (props) => {
             <Input />
           )}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="description" hasFeedback>
+        <Form.Item {...formItemLayout} label="แนะนำสนามวิ่ง" hasFeedback>
           {getFieldDecorator('description', {
             initialValue: _get(event, 'description'),
-            rules: [{ required: true, message: 'กรุณากรอก description' }]
+            rules: [{ required: true, message: 'กรุณากรอก แนะนำสนามวิ่ง' }]
           })(
             <Input />
           )}

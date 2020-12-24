@@ -1,0 +1,52 @@
+.ant-menu-item a {
+    color: rgba(0, 0, 0, 0.85);
+}
+.ant-menu-item a:hover {
+    color: #41aea9;
+}
+.ant-menu-item-selected {
+    color: #41aea9;
+}
+.ant-menu-item-selected a, .ant-menu-item-selected a:hover {
+    color: #41aea9 !important;
+}
+.ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after {
+    border-right: 3px solid #41aea9;
+}
+.ant-layout-sider-zero-width-trigger {
+    background: #213e3b;
+    top: 100px;
+}
+
+.ant-btn-primary {
+    background: #41aea9;
+    border-color: #41aea9;
+}
+.ant-input:hover {
+    border-color: #41aea9;
+    border-right-width: 1px !important;
+}
+.ant-btn:hover, .ant-btn:focus {
+    color: #41aea9;
+    background: #fff;
+    border-color: #41aea9;
+}
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    border-color: #41aea9;
+}
+.ant-select-focused:not(.ant-select-disabled):hover
+.ant-select-selector {
+    border-color:#41aea9 ;
+}
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #41aea9;
+    font-weight: 500;
+}
+.ant-pagination-item-active a {
+    color: #41aea9;
+}
+.ant-pagination-item-active {
+    font-weight: 500;
+    background: #fff;
+    border-color: #41aea9;
+}

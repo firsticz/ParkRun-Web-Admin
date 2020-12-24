@@ -4,6 +4,7 @@ import _includes from 'lodash/includes'
 import compose from 'lodash/flowRight'
 import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
+import './event.css';
 
 import { Menu, Layout } from 'antd'
 import { TeamOutlined, FormOutlined, LineChartOutlined } from '@ant-design/icons'
@@ -62,7 +63,7 @@ const EventSider = (props) => {
         <Menu.Item key="registrations">
           <NavLink to={`/events/${eventId}/registrations`}>
             <TeamOutlined style={{fontSize: 16, color: '#314659'}} />
-              ใบสมัคร
+              ผู้สมัคร
           </NavLink>
         </Menu.Item>
         <Menu.Item key="edit">
@@ -80,7 +81,7 @@ const EventSider = (props) => {
         <Menu.Item key="result">
           <NavLink to={`/events/${eventId}/races`}>
             <LineChartOutlined style={{fontSize: 16, color: '#314659'}} />
-              ผลการแข่งขัน
+              ผลวิ่ง
           </NavLink>
         </Menu.Item>
 

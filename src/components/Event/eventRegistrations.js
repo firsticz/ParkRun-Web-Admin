@@ -49,7 +49,7 @@ const EventRegistrations = () => {
     <Layout>
       <EventSider />
       <Layout.Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
-        <div className="wrap-name" /* style={{float: 'left', marginLeft: '20px', padding: '6px', fontSize: '2em'}} */>
+        <div className="wrap-name">
           นักวิ่ง
         </div>
         <Table

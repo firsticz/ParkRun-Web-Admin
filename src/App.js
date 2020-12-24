@@ -41,19 +41,13 @@ class App extends Component {
             สนามวิ่ง
         </Link>
       </Menu.Item>,
-      // _includes(roles, 'ADMIN') &&
-      //   <Menu.Item key="races">
-      //     <Link to="/races">
-      //       งานวิ่ง
-      //     </Link>
-      //   </Menu.Item>,
         _includes(roles, 'ADMIN') && <Menu.Item key="stats">
          <Link to="/stats">
              สถิติระบบ
          </Link>
        </Menu.Item>,
       _includes(roles, 'ADMIN') && <Menu.Item key="organizers">
-        <Link to="/organizers">
+        <Link to="/organizers" >
             ผู้จัดงาน
         </Link>
       </Menu.Item>,
@@ -64,8 +58,8 @@ class App extends Component {
       </Menu.Item>,
       _includes(roles, 'ADMIN') &&
       <Menu.Item key="createUser">
-        <Link to="/users">
-          createUser
+        <Link to="/users" >
+          เพิ่มสมาชิก
         </Link>
       </Menu.Item>,
 
@@ -83,21 +77,21 @@ class App extends Component {
       <AppWrapper>
         <Layout>
           <Layout.Header className="header">
-              <Logo className="logo">
+              <Logo style={{justifyContent: 'center',display:'flex'}}>
                 <Link to="/">
-                  <img src={logo} alt="Parkrun" />
+                  <img src={logo} alt="Parkrun" className="logo" />
                 </Link>
               </Logo>
               <Menu
                 className="navbar"
-                theme="dark"
                 mode="horizontal"
+                theme="dark"
                 defaultSelectedKeys={['2']}
-                style={{ lineHeight: '64px' }}
+                style={{ lineHeight: '64px' , backgroundColor: '#41aea9', color: '#fff' }}
                 onClick={this.handleMenuClick}
               >
                 {menuItems}
-                <Menu.Item key="logout" style={{ float: 'right' }}>
+                <Menu.Item key="logout" style={{ float: 'right'}}>
                   { `${this.props.name} [${this.props.role}]` } ออกจากระบบ
                 </Menu.Item>
               </Menu>
