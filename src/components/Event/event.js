@@ -63,7 +63,13 @@ class EventList extends Component {
         title: 'สถานะ',
         key: 'status',
         dataIndex: 'approved',
-        render: (record) => record ? record : 'waiting or reject'
+        render: (record) => record ? record : 'waiting or reject',
+        filters: [
+          { text: 'approve', value: 'approve' },
+          { text: 'waiting', value: 'waiting' },
+          { text: 'reject', value: 'reject' },
+        ],
+        onFilter: (value, record) => record.approved.includes(value),
       },
       {
         title: 'ชื่อผู้ดูแล',

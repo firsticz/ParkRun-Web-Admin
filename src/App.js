@@ -9,7 +9,10 @@ import { AppWrapper, Logo } from './style'
 import logo from './images/logo_parkrun.png';
 import './App.css';
 
-import { Layout, Menu, /* Breadcrumb, */ Dropdown } from 'antd'
+import { graphql } from 'react-apollo'
+import compose from 'lodash/flowRight'
+
+import { Layout, Menu, /* Breadcrumb, */ Dropdown, Spin } from 'antd'
 import { BarsOutlined } from '@ant-design/icons'
 import clientAuth from './utils/clientAuth'
 import Events from './components/Event'
@@ -21,6 +24,7 @@ import Races from './components/Race'
 import _get from 'lodash/get'
 import _includes from 'lodash/includes'
 import './style/global.css'
+import getRoleUser from './graphql/queries/getRoleUser'
 
 class App extends Component {
 
@@ -35,6 +39,14 @@ class App extends Component {
 
   render() {
     const roles = _get(this.props, 'role', [])
+    const { data, loading } = this.props
+    if(loading){
+      return <Spin />
+    }
+    if(_get(data.userOne, 'role') === 'USER'){
+      clientAuth.logout()
+      this.props.history.push('/login')
+    }
     const menuItems = [
       <Menu.Item key="events">
         <Link to="/events">
@@ -129,4 +141,10 @@ class App extends Component {
   }
 }
 
-export default App;
+export default compose(
+  graphql(getRoleUser, {
+    options: (props) => ({ 
+        variables: { _id: _get(props, 'id', []) },
+        fetchPolicy: 'network-only' })
+  })
+)(App)
