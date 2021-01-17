@@ -20,6 +20,8 @@ import Users from './components/User'
 import FetchPage from './components/FetchPage'
 import Stats from './components/Stats/stats'
 import Races from './components/Race'
+import Organizers from './components/Organize'
+import Admins from './components/Admin'
 
 import _get from 'lodash/get'
 import _includes from 'lodash/includes'
@@ -127,6 +129,8 @@ class App extends Component {
                   <Route path="/users" component={Users}/>
                   <Route path="/stats" component={Stats}/>
                   <Route path="/races" component={Races}/>
+                  <Route path="/organizers" component={Organizers}/>
+                  <Route path="/admins" component={Admins}/>
                   <Route path="/fetchPage" component={FetchPage}/>
                   {/* <Route path="/events" component={Events}/> */}
                   {/* <Route path="/fetchPage" component={FetchPage}/> */}
