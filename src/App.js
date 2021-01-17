@@ -68,6 +68,11 @@ class App extends Component {
             ผู้ดูแลระบบ
         </Link>
       </Menu.Item>,
+      _includes(roles, 'ADMIN') && <Menu.Item key="races">
+        <Link to="/races">
+          งานวิ่ง
+        </Link>
+      </Menu.Item>,
       _includes(roles, 'ADMIN') &&
       <Menu.Item key="createUser">
         <Link to="/users" >
