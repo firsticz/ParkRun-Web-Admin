@@ -128,7 +128,7 @@ const RaceList = (props) => {
           {status==='open'? <Tag color="green">open</Tag>: <Tag color="red">close</Tag>}
         </span>
         <div style={{marginTop: 5}}>
-          <Dropdown placement="topCenter" overlay={
+          <Dropdown disabled={moment().isAfter(moment(record.startTime))} placement="topCenter" overlay={
             <Menu onClick={({ item, key, keyPath }) => handleModalMobile(key, record._id)}>
               <Menu.Item key="open">
                   เปิด
@@ -159,6 +159,9 @@ const RaceList = (props) => {
           </Col>
           <Col xs={24} md={{ span: 3, offset: 1 }}>
             <Button style={!isMobile ? { margin: '8px' } : null} loading={addLoading} onClick={ ()=> createRaces() }>เพิ่มงานวิ่งทั้งหมด</Button>
+          </Col>
+          <Col xs={24} md={{ span: 3 }}>
+            <Button style={!isMobile ? { margin: '8px' } : null} onClick={ () => history.replace(`/races/create`) } >เพิ่มงานวิ่ง (งานที่ไม่เคยจัดวิ่ง)</Button>
           </Col>
         </Row>
         

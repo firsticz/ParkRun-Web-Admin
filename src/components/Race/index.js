@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import RaceList from './race'
+import CrateRace from './create'
 
 class Races extends Component {
   render () {
@@ -10,6 +11,11 @@ class Races extends Component {
           exact
           path="/races"
           component={RaceList}
+        />
+        <Route 
+          exact
+          path="/races/create"
+          component={CrateRace}
         />
       </Switch>
     )

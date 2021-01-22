@@ -112,7 +112,7 @@ const RaceRegistrations = (props) => {
           {status==='open'? <Tag color="green">open</Tag>: <Tag color="red">close</Tag>}
         </span>
         <div style={{marginTop: 5}}>
-          <Dropdown placement="topCenter" overlay={
+          <Dropdown disabled={moment().isAfter(moment(record.startTime))} placement="topCenter" overlay={
             <Menu onClick={({ item, key, keyPath }) => handleModalMobile(key, record._id)}>
               <Menu.Item key="open">
                   เปิด
