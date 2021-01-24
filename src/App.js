@@ -22,6 +22,7 @@ import Stats from './components/Stats/stats'
 import Races from './components/Race'
 import Organizers from './components/Organize'
 import Admins from './components/Admin'
+import Report from './components/Report'
 
 import _get from 'lodash/get'
 import _includes from 'lodash/includes'
@@ -81,6 +82,12 @@ class App extends Component {
           เพิ่มสมาชิก
         </Link>
       </Menu.Item>,
+      _includes(roles, 'ADMIN') &&
+      <Menu.Item key="reports">
+        <Link to="/report" >
+          รายงาน
+        </Link>
+      </Menu.Item>,
 
     ]
     const menu = (
@@ -126,11 +133,12 @@ class App extends Component {
               <Suspense fallback={<div>Loading...</div>}>
                 <Switch>
                   <Route path="/events" component={Events}/>
-                  <Route path="/users" component={Users}/>
-                  <Route path="/stats" component={Stats}/>
-                  <Route path="/races" component={Races}/>
-                  <Route path="/organizers" component={Organizers}/>
-                  <Route path="/admins" component={Admins}/>
+                  { _includes(roles, 'ADMIN') && <Route path="/users" component={Users}/> }
+                  { _includes(roles, 'ADMIN') && <Route path="/stats" component={Stats}/> }
+                  { _includes(roles, 'ADMIN') && <Route path="/races" component={Races}/> }
+                  { _includes(roles, 'ADMIN') && <Route path="/organizers" component={Organizers}/> }
+                  { _includes(roles, 'ADMIN') && <Route path="/admins" component={Admins}/> }
+                  { _includes(roles, 'ADMIN') && <Route path="/report" component={Report}/> }
                   <Route path="/fetchPage" component={FetchPage}/>
                   {/* <Route path="/events" component={Events}/> */}
                   {/* <Route path="/fetchPage" component={FetchPage}/> */}
