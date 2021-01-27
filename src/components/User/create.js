@@ -67,7 +67,11 @@ function AddUser() {
   
   return (
     <Layout>
-      <Typography.Title>เพิ่มผู้ใช้</Typography.Title>
+      <h2
+      style={{ color:'rgba(0, 0, 0, 0.85)'}}
+      >
+        เพิ่มสมาชิก
+      </h2>
       <Layout.Content>
         <Form
           onFinish={handleAddUser}

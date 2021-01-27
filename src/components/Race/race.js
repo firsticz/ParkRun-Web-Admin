@@ -158,10 +158,10 @@ const RaceList = (props) => {
             />
           </Col>
           <Col xs={24} md={{ span: 3, offset: 1 }}>
-            <Button style={!isMobile ? { margin: '8px' } : null} loading={addLoading} onClick={ ()=> createRaces() }>เพิ่มงานวิ่งทั้งหมด</Button>
+            <Button style={!isMobile ? { margin: '8px' } : null} loading={addLoading} onClick={ ()=> createRaces() }>เพิ่มรายการวิ่งทั้งหมด</Button>
           </Col>
           <Col xs={24} md={{ span: 3 }}>
-            <Button style={!isMobile ? { margin: '8px' } : null} onClick={ () => history.replace(`/races/create`) } >เพิ่มงานวิ่ง (งานที่ไม่เคยจัดวิ่ง)</Button>
+            <Button style={!isMobile ? { margin: '8px' } : null} onClick={ () => history.replace(`/races/create`) } >เพิ่มรายการวิ่ง (สนามวิ่งที่ไม่เคยจัดวิ่ง)</Button>
           </Col>
         </Row>
         

@@ -39,7 +39,6 @@ class App extends Component {
     }
   }
 
-
   render() {
     const roles = _get(this.props, 'role', [])
     const { data, loading } = this.props
@@ -63,7 +62,7 @@ class App extends Component {
        </Menu.Item>,
       _includes(roles, 'ADMIN') && <Menu.Item key="organizers">
         <Link to="/organizers" >
-            ผู้จัดงาน
+            ผู้ดูแลสนาม
         </Link>
       </Menu.Item>,
       _includes(roles, 'ADMIN') && <Menu.Item key="admins">
@@ -73,7 +72,7 @@ class App extends Component {
       </Menu.Item>,
       _includes(roles, 'ADMIN') && <Menu.Item key="races">
         <Link to="/races">
-          งานวิ่ง
+          รายการวิ่ง
         </Link>
       </Menu.Item>,
       _includes(roles, 'ADMIN') &&
@@ -104,9 +103,9 @@ class App extends Component {
         <Layout>
           <Layout.Header className="header">
               <Logo style={{justifyContent: 'center',display:'flex'}}>
-                <Link to="/">
+                <a href="https://parkrunthailand.com/home">
                   <img src={logo} alt="Parkrun" className="logo" />
-                </Link>
+                </a>
               </Logo>
               <Menu
                 className="navbar"
