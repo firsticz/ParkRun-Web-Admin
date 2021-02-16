@@ -13,8 +13,10 @@ import compose from 'lodash/flowRight'
 import _includes from 'lodash/includes'
 import { useMutation } from '@apollo/react-hooks'
 import updateEventMutation from '../../graphql/mutations/updateEvent'
+import updateUserMutation from '../../graphql/mutations/updateUser'
 import clientAuth from '../../utils/clientAuth'
 import ResizeUploader from '../resizeImageUploader'
+import { resetApolloContext } from '@apollo/client'
 const { TextArea } = Input;
 
 const formItemLayout = {
@@ -33,7 +35,9 @@ const EventForm = (props) => {
   const role = clientAuth.login().role
   const { getFieldDecorator } = form
   const [loading, setLoading] = useState(false)
+  const [approveChange, setApproveChange] = useState(false)
   const [eventUpdateById] = useMutation(updateEventMutation)
+  const [userUpdateById] = useMutation(updateUserMutation)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -51,14 +55,27 @@ const EventForm = (props) => {
               ...record
             }
           }
-        }).then(res => 
-            Modal.success({
-              title: 'Updated',
-              onOk: () => {
-                setLoading(false)
-                props.history.push(`/fetchPage?link=/events/${event._id}/edit`)
+        }).then(async (res) => {
+          if(approveChange && record.approved === 'approve'){
+            await userUpdateById({
+              variables: {
+                record: {
+                  _id: res.data.eventUpdateById.record.organizId,
+                  role: 'ORGANIZER'
+                }
               }
             })
+          }
+          Modal.success({
+            title: 'Updated',
+            onOk: () => {
+              setLoading(false)
+              props.history.push(`/fetchPage?link=/events/${event._id}/edit`)
+            }
+          })
+
+        }
+            
           ).catch(err => {
             setLoading(false)
             console.log(err)
@@ -81,6 +98,12 @@ const EventForm = (props) => {
       label: 'จัดเดือนละ 1 ครั้ง (จัดวันเสาร์แรก)',
     }
   ]
+
+  const handleApproveChange = (e) => {
+    if(e === 'approve'){
+      setApproveChange(true)
+    }
+  }
 
   return (
     <Form>
@@ -224,6 +247,7 @@ const EventForm = (props) => {
               showSearch
               optionFilterProp="children"
               filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+              onChange={e => handleApproveChange(e)}
             >
               <Select.Option key={"approve"} value={"approve"}>approve</Select.Option>
               <Select.Option key={"reject"} value={"reject"}>reject</Select.Option>
