@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import EventList from './event'
+import EventCreate from './eventCreate'
 import EventEdit from './eventEdit'
 import EventBoard from './eventBoard'
 import RacesList from './racesList'
@@ -17,6 +18,11 @@ class Events extends Component {
           path="/events"
           component={EventList}
         />
+        <Route
+          exact
+          path="/events/create"
+          component={EventCreate}
+          />
         <Route
           exact
           path="/events/:eventId/edit"

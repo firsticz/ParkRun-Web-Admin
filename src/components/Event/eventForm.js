@@ -164,7 +164,7 @@ const EventForm = (props) => {
             <Input />
           )}
         </Form.Item>
-        <Form.Item {...formItemLayout} label="จัดวันวิ่ง" hasFeedback>
+        {/* <Form.Item {...formItemLayout} label="จัดวันวิ่ง" hasFeedback>
           {getFieldDecorator('levels', {
             initialValue: _get(event, 'levels'),
           })(
@@ -176,7 +176,7 @@ const EventForm = (props) => {
               ))}
             </Select>
           )}
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item {...formItemLayout} label="รายละเอียดเส้นทาง" hasFeedback>
           {getFieldDecorator('road', {
             initialValue: _get(event, 'road'),

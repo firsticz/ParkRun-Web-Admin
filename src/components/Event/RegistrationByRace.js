@@ -49,9 +49,11 @@ const EventRegistrations = (props) => {
   }
 
   const registrations = regis.data.regisMany
+  console.log(registrations);
   const runnerRegistrations = _filter(registrations, {'regisType': 'RUNNER'})
   const valunteerRegistrations = _filter(registrations, {'regisType': 'VALUNTEER'})
-
+  const runnercount = runnerRegistrations.length
+  const valunteercount = valunteerRegistrations.length
   const handleModalMobile = (key, id) => {
     const lowerKey = key.toLowerCase()
     if(lowerKey) {
@@ -255,6 +257,7 @@ const EventRegistrations = (props) => {
         <h1>{_get(RaceOne.data.raceOne, 'name')}</h1>
         <Tabs defaultActiveKey="1" type="card" size={'small'}>
           <TabPane tab="นักวิ่ง" key="1">
+            <h1 align='end'>นักวิ่งที่สมัครทั้งหมด {runnercount} คน</h1>
             <Table
             columns={columns1}
             dataSource={runnerRegistrations}
@@ -277,6 +280,7 @@ const EventRegistrations = (props) => {
             />
           </TabPane>
           <TabPane tab="อาสาสมัคร" key="2">
+          <h1 align='end'>อาสาสมัครที่สมัครทั้งหมด {valunteercount} คน</h1>
             <Button type="primary" onClick={()=> setSearchModal(true)}>
                   เพิ่มอาสาสมัคร
             </Button>

@@ -17,12 +17,12 @@ const MyResponsiveLine = ({ data }) => {
         axisTop={null}
         axisRight={null}
         axisBottom={{
-            orient: 'bottom',
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: 'วันที่',
-            legendOffset: 36,
+            orient: 'top',
+            tickSize: 10,
+            tickPadding: 0,
+            tickRotation: -45,
+            // legend: 'วันที่',
+            legendOffset: 20,
             legendPosition: 'middle'
         }}
         axisLeft={{
@@ -47,7 +47,7 @@ const MyResponsiveLine = ({ data }) => {
                 direction: 'column',
                 justify: false,
                 translateX: 100,
-                translateY: 0,
+                translateY: 50,
                 itemsSpacing: 0,
                 itemDirection: 'left-to-right',
                 itemWidth: 80,

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import AddUser from './create'
+import FindUser from './find'
+import EditUser from './userEdit'
 
 class Users extends Component {
   render () {
@@ -11,6 +13,16 @@ class Users extends Component {
           path="/users"
           component={AddUser}
         />
+        <Route 
+          exact
+          path="/users/find"
+          component={FindUser}
+        />
+        <Route
+          exact
+          path="/users/:userId/edit"
+          component={EditUser}
+          />
       </Switch>
     )
   }

@@ -56,10 +56,10 @@ const MyResponsiveBar = ({ data /* see data tab */ }) => (
         axisBottom={{
             tickSize: 5,
             tickPadding: 5,
-            tickRotation: 0,
-            legend: 'วันที่',
+            tickRotation: -45,
+            // legend: 'วันที่',
             legendPosition: 'middle',
-            legendOffset: 32
+            legendOffset: 40
         }}
         axisLeft={{
             tickSize: 5,
