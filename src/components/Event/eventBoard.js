@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { Layout, Table, Space } from 'antd'
+import { Layout, Table, Space, Button } from 'antd'
 // import { gql, useQuery } from '@apollo/client'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
@@ -18,7 +18,9 @@ import _reverse from 'lodash/reverse'
 import _sortBy from 'lodash/sortBy'
 import _last from 'lodash/last'
 import _orderBy from 'lodash/orderBy'
+import _includes from 'lodash/includes'
 // import last from 'lodash/last'
+import clientAuth from '../../utils/clientAuth'
 
 ReactFC.fcRoot(FusionCharts, Charts, FusionTheme)
 
@@ -153,9 +155,10 @@ function sortRank(data) {
   return orderedDataWithPos.concat(dnfData)
 }
 
-function PublicBoard() {
+function PublicBoard(props) {
   const { eventId } = useParams()
   const { data, loading } = useQuery(GET_EVENT_AND_CHECKPOINT, { variables: { eventId }})
+  const role = clientAuth.login().role
 
   if (loading) return <div>loading...</div>
   const { raceById: event , checkpointByEventId: checkpoints } = data
@@ -221,6 +224,7 @@ function PublicBoard() {
       <Layout.Content>
         <Space style={{ width: '100%' }} direction="vertical">
           <h1>ผลการแข่งขันงาน {event.name}</h1>
+          {_includes(role, 'ADMIN') && <Button onClick={() =>  props.history.replace(`/events/${eventId}/checkpoint`)}>add checkpoint</Button>}
           <Table rowKey={record => record.bib} columns={columns} dataSource={dataSource} pagination={{ pageSize: 100 }} />
         </Space>
       </Layout.Content>

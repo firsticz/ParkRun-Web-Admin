@@ -9,6 +9,7 @@ import Registrations from './RegistrationByRace'
 import RaceRegistrations from './racesRegistration'
 import EventStats from './eventStats'
 import RaceCreate from './raceCreate'
+import AddCheckpoint from './addCheckpoint'
 class Events extends Component {
   render () {
     return (
@@ -42,6 +43,11 @@ class Events extends Component {
           exact
           path="/events/:eventId/result"
           component={EventBoard}
+          />
+          <Route
+          exact
+          path="/events/:eventId/checkpoint"
+          component={AddCheckpoint}
           />
           <Route
           exact
