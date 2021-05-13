@@ -7,7 +7,7 @@ import {
   Select,
   Modal,
 } from 'antd'
-import { Layout, Table, Space, TimePicker } from 'antd'
+import { Layout, Table, Space, TimePicker, InputNumber } from 'antd'
 import { Form } from '@ant-design/compatible'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
@@ -46,8 +46,8 @@ query getRace($eventId: MongoID!){
 }
 `
 const MUTATION_CP = gql`
-mutation addCheckpoint($raceId:MongoID!, $bib: String, $time: Date, $bibVolunteer: String, $position: Int){
-	checkpointManual(raceId: $raceId, bib: $bib, time: $time, bibVolunteer: $bibVolunteer, position: $position){
+mutation addCheckpoint($raceId:MongoID!, $bib: String, $hour: Int, $minute: Int, $second: Int, $bibVolunteer: String, $position: Int){
+	checkpointManual(raceId: $raceId, bib: $bib, hour: $hour, minute: $minute, second: $second, bibVolunteer: $bibVolunteer, position: $position){
 		_id
 	}
 }
@@ -134,12 +134,28 @@ const AddCheckpoint = (props) => {
 								<Input />
 							)}
 						</Form.Item>
-						<Form.Item {...formItemLayout} label="เวลาวิ่ง" hasFeedback>
-							{getFieldDecorator('time', {
+						<Form.Item {...formItemLayout} label="เวลาวิ่ง(ชั่วโมง)" hasFeedback>
+							{getFieldDecorator('hour', {
 								initialValue: null,
-								rules: [{ required: true, message: 'กรุณากรอกเวลาวิ่ง' }]
+								rules: [{ required: true, message: 'กรุณากรอกเวลาวิ่ง(ชั่วโมง)' }]
 							})(
-								<TimePicker defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />
+								<InputNumber min={0} />
+							)}
+						</Form.Item>
+						<Form.Item {...formItemLayout} label="เวลาวิ่ง(นาที)" hasFeedback>
+							{getFieldDecorator('minute', {
+								initialValue: null,
+								rules: [{ required: true, message: 'กรุณากรอกเวลาวิ่ง(นาที)' }]
+							})(
+								<InputNumber min={0} />
+							)}
+						</Form.Item>
+						<Form.Item {...formItemLayout} label="เวลาวิ่ง(วินาที)" hasFeedback>
+							{getFieldDecorator('second', {
+								initialValue: null,
+								rules: [{ required: true, message: 'กรุณากรอกเวลาวิ่ง(วินาที)' }]
+							})(
+								<InputNumber min={0} />
 							)}
 						</Form.Item>
 						<Form.Item {...formItemLayout} label="เลขบิบอาสาสมัคร" hasFeedback>

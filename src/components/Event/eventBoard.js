@@ -157,7 +157,7 @@ function sortRank(data) {
 
 function PublicBoard(props) {
   const { eventId } = useParams()
-  const { data, loading } = useQuery(GET_EVENT_AND_CHECKPOINT, { variables: { eventId }})
+  const { data, loading } = useQuery(GET_EVENT_AND_CHECKPOINT, { variables: { eventId }, fetchPolicy: 'network-only'})
   const role = clientAuth.login().role
 
   if (loading) return <div>loading...</div>
