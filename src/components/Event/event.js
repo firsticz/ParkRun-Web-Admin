@@ -104,9 +104,9 @@ const EventList = (props) => {
               style={!isMobile ? { width: '388px', margin: '8px' } : null}
               />
           </Col>
-          <Col xs={24} md={{ span: 3, offset: 1 }}>
+          {/* <Col xs={24} md={{ span: 3, offset: 1 }}>
             {(_includes(role, 'ADMIN')) &&<Button style={!isMobile ? { margin: '8px' } : null} loading={addLoading} href="/events/create">เพิ่มสนามวิ่ง</Button>}
-          </Col>
+          </Col> */}
         </Row>
           <Table
             onRow={(record, rowIndex) => {
