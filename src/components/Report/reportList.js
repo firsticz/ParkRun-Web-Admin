@@ -1,18 +1,15 @@
-import React, { Component, useState } from 'react'
-import {
-  Link
-} from 'react-router-dom'
+import React, { useState } from 'react'
 
-import { useParams, useHistory } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { Input, Spin, Layout, List, Row, Col, Button } from 'antd'
-import { TagsOutlined } from '@ant-design/icons'
+import { Input, Spin, Layout, List, Row, Col, Button, Divider, InputNumber, Modal } from 'antd'
 import moment from 'moment'
 import 'moment/locale/th'
 import _orderBy from 'lodash/orderBy'
 import _get from 'lodash/get'
 import EventAgeQuery from '../../graphql/queries/exportEventAge'
 import ReactExport from 'react-data-export'
+import RunnerExportTimeMutation from '../../graphql/mutations/exportRunnerTime'
+import VolunteerExportTimeMutation from '../../graphql/mutations/exportVolunteerTime'
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet
@@ -20,7 +17,13 @@ const ExcelColumn = ReactExport.ExcelFile.ExcelColumn
 const Search = Input.Search
 moment.locale('th')
 
-const ReportList = () => {
+const ReportList = (props) => {
+	const [runnerTime, setRunnerTime] = useState(1)
+	const [volunteerTime, setVolunteerTime] = useState(1)
+	const [loading, setLoading] = useState(false)
+
+	const [exportRunner] = useMutation(RunnerExportTimeMutation)
+	const [exportVolunteer] = useMutation(VolunteerExportTimeMutation)
 
 	const eventAge = useQuery(EventAgeQuery, {
     fetchPolicy: 'network-only',
@@ -30,10 +33,78 @@ const ReportList = () => {
     return <Spin />
 	}
 	const time = moment().format('YYYY-MM-DD')
+
+	const onRunnerChange = (e) => {
+		setRunnerTime(e)
+	}
+	const onVolunteerChange = (e) => {
+		setVolunteerTime(e)
+	}
+
+	const onRunnerExportSubmit = (e) => {
+		e.preventDefault()
+		console.log(runnerTime);
+		setLoading(true)
+		if(runnerTime >= 1) {
+			exportRunner({
+				variables: {
+					time: runnerTime
+				}
+			}).then(async (res) => {
+				console.log(res);
+				Modal.success({
+					title: 'Download',
+					content: (
+						<div>
+							<a href={`${res.data.exportRunner.url}`}>{res.data.exportRunner.fileName}</a>
+						</div>
+					),
+					onOk: () => {
+						setLoading(false)
+						props.history.push(`/fetchPage?link=/report`)
+					}
+				})
+			})
+		}
+		else{
+			setLoading(false)
+		}
+	}
+
+	const onVolunteerExportSubmit = (e) => {
+		e.preventDefault()
+		setLoading(true)
+		if(volunteerTime >= 1) {
+			exportVolunteer({
+				variables: {
+					time: volunteerTime
+				}
+			}).then(async (res) => {
+				console.log(res);
+				Modal.success({
+					title: 'Download',
+					content: (
+						<div>
+							<a href={`${res.data.exportVolunteer.url}`}>{res.data.exportVolunteer.fileName}</a>
+						</div>
+					),
+					onOk: () => {
+						setLoading(false)
+						props.history.push(`/fetchPage?link=/report`)
+					}
+				})
+			})
+		}
+		else{
+			setLoading(false)
+		}
+	}
 	
+
 	return (
 		<Layout>
       <Layout.Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+	  		<Divider>All</Divider>
 				<Row gutter={[8, 8]} justify='start'>
 					<Col xs={24} md={6}>
 						<List bordered={true}>
@@ -63,7 +134,36 @@ const ReportList = () => {
 						</List>
 					</Col>
 				</Row>
-				
+				<Divider>Runner</Divider>
+				<Row gutter={[8, 8]} justify='start'>
+				<Col xs={24} md={12}>
+						<List bordered={true}>
+							<List.Item key='eventage'>
+								<List.Item.Meta
+									title='จำนวนครั้งในการวิ่ง ตามจำนวนที่กำหนด'
+								/>
+									<InputNumber  min={1} defaultValue={1} onChange={e => onRunnerChange(e)}  />
+									<Button loading={loading} onClick={onRunnerExportSubmit}>Download</Button>
+							</List.Item>
+							
+						</List>
+					</Col>
+				</Row>
+				<Divider>Volunteer</Divider>
+				<Row gutter={[8, 8]} justify='start'>
+				<Col xs={24} md={12}>
+						<List bordered={true}>
+							<List.Item key='eventage'>
+								<List.Item.Meta
+									title='จำนวนครั้งในการเป็นอาสาสมัคร ตามจำนวนที่กำหนด'
+								/>
+									<InputNumber  min={1} defaultValue={1} onChange={e => onVolunteerChange(e)} />
+									<Button loading={loading} onClick={onVolunteerExportSubmit}>Download</Button>
+							</List.Item>
+							
+						</List>
+					</Col>
+				</Row>
 			</Layout.Content>
 		</Layout>
 	)
