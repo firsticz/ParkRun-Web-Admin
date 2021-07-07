@@ -1,6 +1,7 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import { Layout, Table, Space, Button } from 'antd'
+import React, { useState } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
+import { Layout, Table, Space, Button, Popconfirm, Modal } from 'antd'
+import { QuestionCircleOutlined } from '@ant-design/icons'
 // import { gql, useQuery } from '@apollo/client'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
@@ -21,6 +22,8 @@ import _orderBy from 'lodash/orderBy'
 import _includes from 'lodash/includes'
 // import last from 'lodash/last'
 import clientAuth from '../../utils/clientAuth'
+import deleteCheckPointMutation from '../../graphql/mutations/deleteCheckPoint'
+import { useMutation } from '@apollo/react-hooks'
 
 ReactFC.fcRoot(FusionCharts, Charts, FusionTheme)
 
@@ -102,6 +105,7 @@ function buildData({ startTime, haveChipTime, checkpoints }, checkpointsData) {
         const splitTime = calcTime(defaultTime, data.time)
         result[data.position] = splitTime
         result.name = _get(data, 'user.name', '-')
+        result._id = _get(data, '_id')
       })
 
       checkpointsInfo.forEach(({ position, distance }, index) => {  // รวมเวลาทั้งหมดไว้ใน array
@@ -159,6 +163,11 @@ function PublicBoard(props) {
   const { eventId } = useParams()
   const { data, loading } = useQuery(GET_EVENT_AND_CHECKPOINT, { variables: { eventId }, fetchPolicy: 'network-only'})
   const role = clientAuth.login().role
+  const history = useHistory()
+
+  const [allLoading, setLoading] = useState(false)
+
+  const [deleteCheckPoint] = useMutation(deleteCheckPointMutation)
 
   if (loading) return <div>loading...</div>
   const { raceById: event , checkpointByEventId: checkpoints } = data
@@ -180,6 +189,27 @@ function PublicBoard(props) {
       return `${time} \n (${place})`
     }
   }))
+
+  const onConfirmDelete = (id) => {
+    setLoading(true)
+    deleteCheckPoint({
+      variables: {
+        _id: id
+      }
+    }).then(res => 
+      Modal.success({
+        title: 'Updated',
+        onOk: () => {
+          setLoading(false)
+          history.replace(`/fetchPage?link=/events/${eventId}/result`)
+        }
+      })
+    ).catch(err => {
+      setLoading(false)
+      console.log(err)
+    })
+
+  }
 
   const columns = [
     {
@@ -214,6 +244,25 @@ function PublicBoard(props) {
       dataIndex: 'avgPace',
       key: 'avgPace'
     },
+    {
+      title: 'ลบ',
+      dataIndex: '_id',
+      key: 'status',
+      render: (status, record) => (<React.Fragment>
+        <div style={{marginTop: 5}}>
+          <Popconfirm 
+            title="Are you sure？" 
+            icon={<QuestionCircleOutlined 
+            style={{ color: 'red' }} />} 
+            onConfirm={e => onConfirmDelete(record._id)}
+            disabled={allLoading}
+          >
+            <Button style={{ fontSize: 10, padding: '0 4px' }} danger>ลบ</Button>
+          </Popconfirm>
+        </div>
+        </React.Fragment>
+      )
+    }
   ]
   
   const groupedCheckpoints = _groupBy(checkpoints, cp => cp.user.bib)

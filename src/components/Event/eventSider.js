@@ -54,12 +54,12 @@ const EventSider = (props) => {
         selectedKeys={[pathname[3]]}
         style={{ height: '100%' }}
       >
-        { _includes(role, 'ADMIN') && <Menu.Item key="races">
+        {/* { _includes(role, 'ADMIN') && <Menu.Item key="create">
           <NavLink to={`/events/${eventId}/createrace`}>
             <TeamOutlined style={{fontSize: 16, color: '#314659'}} />
               สร้างงานวิ่งย่อย
           </NavLink>
-        </Menu.Item>}
+        </Menu.Item>} */}
         <Menu.Item key="registrations">
           <NavLink to={`/events/${eventId}/registrations`}>
             <TeamOutlined style={{fontSize: 16, color: '#314659'}} />
@@ -78,7 +78,7 @@ const EventSider = (props) => {
               สถิติการสมัคร
           </NavLink>
         </Menu.Item> */}
-        <Menu.Item key="result">
+        <Menu.Item key="races">
           <NavLink to={`/events/${eventId}/races`}>
             <LineChartOutlined style={{fontSize: 16, color: '#314659'}} />
               ผลวิ่ง
