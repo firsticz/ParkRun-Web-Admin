@@ -20,20 +20,20 @@ const FindUser = (props) => {
   // const [searchKey, setSearchKey] = useState('')
   // const [search, setSearch] = useState(false)
   const { getFieldDecorator } = props.form
-  const [user, setUser] = useState({})
+  //const [user, setUser] = useState({})
   const [loading, setLoading] = useState(false)
   // const [searchModal, setSearchModal] = useState(false)
 
     // const { data, loading, history } = this.props
-    const userrole = useQuery(getUserByBib, {
+    const user = useQuery(getUserByBib, {
       // variables: {
       //   bib : searchKey
       // },
       fetchPolicy: 'cache-and-network',
     })
-    const userLoading = _get(userrole, 'loading')
+    const userLoading = _get(user, 'loading')
     // console.log(userLoading);
-    let users = _get(userrole, 'data.userOne')
+    let users = _get(user, 'data.userOne')
     // console.log(typeof users);
     // console.log(users);
     // const { isMobile } = this.state
@@ -122,9 +122,7 @@ const FindUser = (props) => {
           setLoading(false)
           return console.error(err)
         }
-        const result = await userrole.refetch({bib: Number(record.bib)})
-        // console.log(result);
-        setUser(result.data.userOne)
+        user.refetch({bib: Number(record.bib)})
         // console.log(user);
         setLoading(false)
       })
@@ -135,11 +133,6 @@ const FindUser = (props) => {
     // };
     return (
       <div>
-        {/* <Search
-          placeholder="ค้นหา"
-          onChange={ e => setSearchKey( e.target.value)}
-          // style={!isMobile ? { width: '388px', margin: '8px' } : null}
-        /> */}
         <Form style={{ width: '200px', marginTop: '2em' }}  layout="inline">
           <Form.Item>
             {getFieldDecorator('bib', {
@@ -154,43 +147,28 @@ const FindUser = (props) => {
             </Button>
           </Form.Item>
         </Form>
-        {user && user.name && <List>
-          <List.Item actions={[<Link to={{
-            pathname:`${/users/}${users._id}/edit`
-          }}
+        {users && users.name && <List>
+          <List.Item 
+          // actions={[<Link to={{
+          //   pathname:`${/users/}${users._id}/edit`
+          // }}
+          // >
+          //   แก้ไข
+          // </Link>, <a key="list-loadmore-more">ลบ</a>]}
           >
-            แก้ไข
-          </Link>, <a key="list-loadmore-more">ลบ</a>]}>
             <List.Item.Meta 
               avatar={
-                <Avatar size={80} src={`${user.image}`} />
+                <Avatar size={80} src={`${users.image}`} />
               }
-              title={`ชื่อ ${user.name}`}
-              description={`BIB: ${user.bib}, เบอร์โทร: ${user.phone}`}
+              title={`ชื่อ ${users.name}`}
+              description={
+                <div>
+                  <p>BIB: {users.bib}, เบอร์โทร: {users.phone}</p><p>email: {users.email}</p>
+                </div>
+              }
             />
           </List.Item>
         </List>}
-        {/* <Table
-          onRow={(record, rowIndex) => {
-            // console.log({record})
-            return {
-              onClick: user => {
-                history.replace(`/users/${record._id}/edit`)
-              } // click row
-              // onDoubleClick: event => {}, // double click row
-              // onContextMenu: event => {}, // right button click row
-              // onMouseEnter: event => {}, // mouse enter row
-              // onMouseLeave: event => {}, // mouse leave row
-            }
-          }}
-          style={{whiteSpace: 'nowrap', background: '#fff'}}
-          scroll={{ x: true }}
-          // columns={columns}
-          dataSource={_.users}
-          loading={loading}
-          // locale={{emptyText: 'ไม่มีข้อมูล'}}
-          rowKey={record => record._id}
-        /> */}
       </div>
     )
 }

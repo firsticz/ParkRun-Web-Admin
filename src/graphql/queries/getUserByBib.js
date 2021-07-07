@@ -8,6 +8,7 @@ query getUser($bib: Float!) {
       phone
       bib
       image
+      email
     }
   }
 `

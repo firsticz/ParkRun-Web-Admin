@@ -10,6 +10,7 @@ import EventAgeQuery from '../../graphql/queries/exportEventAge'
 import ReactExport from 'react-data-export'
 import RunnerExportTimeMutation from '../../graphql/mutations/exportRunnerTime'
 import VolunteerExportTimeMutation from '../../graphql/mutations/exportVolunteerTime'
+import AllRunnerExportMutation from '../../graphql/mutations/exportAllRunner'
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet
@@ -24,6 +25,7 @@ const ReportList = (props) => {
 
 	const [exportRunner] = useMutation(RunnerExportTimeMutation)
 	const [exportVolunteer] = useMutation(VolunteerExportTimeMutation)
+	const [exportAllRunner] = useMutation(AllRunnerExportMutation)
 
 	const eventAge = useQuery(EventAgeQuery, {
     fetchPolicy: 'network-only',
@@ -56,7 +58,7 @@ const ReportList = (props) => {
 					title: 'Download',
 					content: (
 						<div>
-							<a href={`${res.data.exportRunner.url}`}>{res.data.exportRunner.fileName}</a>
+							<a href={`${res.data.exportRunner.url}`} download>{res.data.exportRunner.fileName}</a>
 						</div>
 					),
 					onOk: () => {
@@ -85,7 +87,7 @@ const ReportList = (props) => {
 					title: 'Download',
 					content: (
 						<div>
-							<a href={`${res.data.exportVolunteer.url}`}>{res.data.exportVolunteer.fileName}</a>
+							<a href={`${res.data.exportVolunteer.url}`} download>{res.data.exportVolunteer.fileName}</a>
 						</div>
 					),
 					onOk: () => {
@@ -99,6 +101,31 @@ const ReportList = (props) => {
 			setLoading(false)
 		}
 	}
+
+	const onAllRunnerExportSubmit = (e) => {
+		e.preventDefault()
+		setLoading(true)
+		exportAllRunner({
+			variables: {
+				time: volunteerTime
+			}
+		}).then(async (res) => {
+			console.log(res);
+			Modal.success({
+				title: 'Download',
+				content: (
+					<div>
+						<a href={`${res.data.exportAllRuuner.url}`} download>{res.data.exportAllRuuner.fileName}</a>
+					</div>
+				),
+				onOk: () => {
+					setLoading(false)
+					props.history.push(`/fetchPage?link=/report`)
+				}
+			})
+		})
+		
+	}
 	
 
 	return (
@@ -106,7 +133,7 @@ const ReportList = (props) => {
       <Layout.Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
 	  		<Divider>All</Divider>
 				<Row gutter={[8, 8]} justify='start'>
-					<Col xs={24} md={6}>
+					<Col xs={24} md={12}>
 						<List bordered={true}>
 							<List.Item key='eventage'>
 								<List.Item.Meta
@@ -129,6 +156,19 @@ const ReportList = (props) => {
 											<ExcelColumn label="Over80" value="Over80"/>
 									</ExcelSheet>
             		</ExcelFile>
+							</List.Item>
+							
+						</List>
+					</Col>
+				</Row>
+				<Row gutter={[8, 8]} justify='start'>
+				<Col xs={24} md={12}>
+						<List bordered={true}>
+							<List.Item key='eventage'>
+								<List.Item.Meta
+									title='AllRunner'
+								/>
+									<Button loading={loading} onClick={onAllRunnerExportSubmit}>Download</Button>
 							</List.Item>
 							
 						</List>

@@ -84,6 +84,12 @@ const EventSider = (props) => {
               ผลวิ่ง
           </NavLink>
         </Menu.Item>
+        {/* <Menu.Item key="export">
+          <NavLink to={`/events/${eventId}/export`}>
+            <LineChartOutlined style={{fontSize: 16, color: '#314659'}} />
+              ดาวน์โหลด
+          </NavLink>
+        </Menu.Item> */}
 
       </Menu>
     </Sider>

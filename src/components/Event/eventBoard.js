@@ -224,7 +224,7 @@ function PublicBoard(props) {
       <Layout.Content>
         <Space style={{ width: '100%' }} direction="vertical">
           <h1>ผลการแข่งขันงาน {event.name}</h1>
-          {_includes(role, 'ADMIN') && <Button onClick={() =>  props.history.replace(`/events/${eventId}/checkpoint`)}>add checkpoint</Button>}
+          {_includes(role, 'ADMIN') && <Button onClick={() =>  props.history.replace(`/events/${eventId}/checkpoint`)}>add finisher</Button>}
           <Table rowKey={record => record.bib} columns={columns} dataSource={dataSource} pagination={{ pageSize: 100 }} />
         </Space>
       </Layout.Content>

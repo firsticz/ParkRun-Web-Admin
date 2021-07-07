@@ -99,6 +99,33 @@ const EventForm = (props) => {
     }
   ]
 
+  const regionList = [
+    {
+      value: 'ภาคเหนือ',
+      label: 'ภาคเหนือ',
+    },
+    {
+      value: 'ภาคตะวันออกเฉียงเหนือ',
+      label: 'ภาคตะวันออกเฉียงเหนือ',
+    },
+    {
+      value: 'ภาคตะวันตก',
+      label: 'ภาคตะวันตก',
+    },
+    {
+      value: 'ภาคกลาง',
+      label: 'ภาคกลาง',
+    },
+    {
+      value: 'ภาคตะวันออก',
+      label: 'ภาคตะวันออก',
+    },
+    {
+      value: 'ภาคใต้',
+      label: 'ภาคใต้',
+    },
+  ]
+
   const handleApproveChange = (e) => {
     if(e === 'approve'){
       setApproveChange(true)
@@ -164,7 +191,7 @@ const EventForm = (props) => {
             <Input />
           )}
         </Form.Item>
-        {/* <Form.Item {...formItemLayout} label="จัดวันวิ่ง" hasFeedback>
+        <Form.Item {...formItemLayout} label="จัดวันวิ่ง" hasFeedback>
           {getFieldDecorator('levels', {
             initialValue: _get(event, 'levels'),
           })(
@@ -176,7 +203,20 @@ const EventForm = (props) => {
               ))}
             </Select>
           )}
-        </Form.Item> */}
+        </Form.Item>
+        <Form.Item {...formItemLayout} label="ภาค" hasFeedback>
+          {getFieldDecorator('region', {
+            initialValue: _get(event, 'region'),
+          })(
+            <Select
+              placeholder="เลือก ภาค"
+            >
+              {regionList && regionList.map((le) => (
+                <Select.Option  value={le.value}>{le.label}</Select.Option>
+              ))}
+            </Select>
+          )}
+        </Form.Item>
         <Form.Item {...formItemLayout} label="รายละเอียดเส้นทาง" hasFeedback>
           {getFieldDecorator('road', {
             initialValue: _get(event, 'road'),

@@ -91,6 +91,12 @@ class App extends Component {
       _includes(roles, 'ADMIN') &&
       <Menu.Item key="reports">
         <Link to="/report" >
+          ดาวโหลดรายงาน
+        </Link>
+      </Menu.Item>,
+      _includes(roles, 'ADMIN') &&
+      <Menu.Item key="reportsrunner">
+        <Link to="/report/runner" >
           รายงาน
         </Link>
       </Menu.Item>,

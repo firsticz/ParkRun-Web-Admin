@@ -26,6 +26,7 @@ query($_id : MongoID){
         banner
         eventRoute
         levels
+        region
     }
   }
 `

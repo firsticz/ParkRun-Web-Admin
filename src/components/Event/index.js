@@ -10,6 +10,7 @@ import RaceRegistrations from './racesRegistration'
 import EventStats from './eventStats'
 import RaceCreate from './raceCreate'
 import AddCheckpoint from './addCheckpoint'
+import ExportEvent from './exportEvent'
 class Events extends Component {
   render () {
     return (
@@ -68,6 +69,11 @@ class Events extends Component {
           exact
           path="/events/:eventId/createrace"
           component={RaceCreate}
+          />
+          <Route
+          exact
+          path="/events/:eventId/export"
+          component={ExportEvent}
           />
       </Switch>
     )
